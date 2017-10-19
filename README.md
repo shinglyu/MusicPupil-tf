@@ -25,9 +25,11 @@ tensorboard --logdir=logs
 ```
 TODO:
 
-Try some mock music data
+v Try some mock music data
 Use real music data
 Split training script and prediction script, passing model files
+  - v Save the model after training
+  - Write a prediction script that takes the model and make prediction
 Figure out how to save log and model into organized folders
   - Need to highlight parameters and assumptions
 Automatic Train/Test splitting 
