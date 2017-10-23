@@ -1,0 +1,5 @@
+split/*.xml
+split/*.mid
+whole/*.xml
+whole/*.mid
+whole/*.phrase
