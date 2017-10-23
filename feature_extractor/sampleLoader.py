@@ -11,7 +11,7 @@ def parseFileList(inputList):
 
 
 def loadTrainSample(sampleName):
-    
+
    scoreName = sampleName+ ".score.xml";
    metaName  = sampleName+ ".meta";
    perfName  = sampleName+ ".perf.mid";
@@ -22,15 +22,15 @@ def loadTrainSample(sampleName):
    name = os.path.basename(sampleName)
    return {'name': name, 'score':score, 'meta':meta, 'perf':perf}
 
-def loadGenScore(sampleName):
-   scoreName = sampleName + ".score.xml";
-   metaName = sampleName  + ".meta";
-
-   score = converter.parse(scoreName);
-   meta = loadMetadata(metaName)
-   name = os.path.basename(sampleName)
-   return {'name': name, 'score':score, 'meta':meta}
-
+# def loadGenScore(sampleName):
+#    scoreName = sampleName + ".score.xml";
+#    metaName = sampleName  + ".meta";
+#
+#    score = converter.parse(scoreName);
+#    meta = loadMetadata(metaName)
+#    name = os.path.basename(sampleName)
+#    return {'name': name, 'score':score, 'meta':meta}
+#
 def loadMetadata(metaName):
    try:
       with open(metaName) as f:

@@ -9,7 +9,7 @@ import logging
 def formatFeatFile(name, scoreFeats, perfFeats):
    #reused in model.py gen()
    return {'name':name, 'scoreFeats':scoreFeats, 'perfFeats':perfFeats}
-
+#
 def extractTrainFeat(sample):
    name = sample['name']
    scoreFeats = extractFeats(sample, 'score')
@@ -17,12 +17,12 @@ def extractTrainFeat(sample):
    #return {'name':name, 'scoreFeats':scoreFeats, 'perfFeats':perfFeats}
    return formatFeatFile(name, scoreFeats, perfFeats)
 
-def extractGenFeat(sample):
-   name = sample['name']
-   scoreFeats = extractFeats(sample, 'score')
-   #return {'name':name, 'scoreFeats':scoreFeats}
-   return formatFeatFile(name, scoreFeats, {})
-
+# def extractGenFeat(sample):
+#    name = sample['name']
+#    scoreFeats = extractFeats(sample, 'score')
+#    #return {'name':name, 'scoreFeats':scoreFeats}
+#    return formatFeatFile(name, scoreFeats, {})
+#
 def extractFeats(sample, featType):
    feats={}
    for featName in getattr(config, featType + 'FeatsList'):
@@ -31,21 +31,22 @@ def extractFeats(sample, featType):
       feats[featName]= (featFunc(sample))
    return feats
 
-def applyFeats(inScore, perfFeats):
-   outScore = inScore
-   for featName , featValue in perfFeats.items():
-      applyFunc = getattr(perfFeature, 'apply'+featName)
-      outScore = applyFunc(outScore, perfFeats)
-      #logging.printDebug(applyFunc)
-   ##logging.printDebug(outScore)
-   #if config.DEBUG: outScore['score'].show('text')
-   return outScore
-
+# def applyFeats(inScore, perfFeats):
+#    outScore = inScore
+#    for featName , featValue in perfFeats.items():
+#       applyFunc = getattr(perfFeature, 'apply'+featName)
+#       outScore = applyFunc(outScore, perfFeats)
+#       #logging.printDebug(applyFunc)
+#    ##logging.printDebug(outScore)
+#    #if config.DEBUG: outScore['score'].show('text')
+#    return outScore
+#
+# TODO: deprecate this!
 def saveJson(featList, filename):
    with open(filename, 'w') as f:
       json.dump(featList, f, indent=3)
-
-def loadJson(filename):
-   with open(filename, 'r') as f:
-      return json.load(f, encoding='utf-8')
-
+#
+# def loadJson(filename):
+#    with open(filename, 'r') as f:
+#       return json.load(f, encoding='utf-8')
+#

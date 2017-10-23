@@ -8,6 +8,7 @@ def main():
    inputlist = "../data/corpus/split/test.list"
    # We should probably extract all features, and let training script split it
 
+   # TODO: maybe auto-search the folder?
    trainSampList = sampleLoader.parseFileList(inputlist)
 
    trainFeatsList = []
@@ -18,6 +19,7 @@ def main():
 
    # trainFeatFilename = config.getTrainInFeatFilename(args)
    trainFeatFilename = "./test_features.json"
+   # TODO: just use json here
    featureManager.saveJson(trainFeatsList, trainFeatFilename);
 
 if __name__ == "__main__":
