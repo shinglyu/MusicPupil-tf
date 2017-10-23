@@ -34,4 +34,5 @@ Figure out how to save log and model into organized folders
   - Need to highlight parameters and assumptions
 Automatic Train/Test splitting 
 Automatic parameter selection
-
+Use the audio and visual dashboard in TensorBoard
+Test Python3
