@@ -1,12 +1,18 @@
 # Install 
 ```
-virtualenv venv # Path can't have spaces
+virtualenv -p python3 venv # Path can't have spaces
 source venv/bin/activate
 pip install tensorflow
-pip install pandas scikit-learn scipy numpy
+pip install pandas scikit-learn scipy numpy pytest music21
 ```
 
 # Run 
+## Unittest 
+
+```
+python -m pytest
+```
+
 ## Training
 * Put the data in `data/`
 * Run 

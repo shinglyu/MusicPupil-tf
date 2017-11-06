@@ -1,7 +1,7 @@
-import cPickle
+#import cPickle
 
-import config
-import logging
+#import config
+#import logging
 
 # def cacheByName(function):
 #    memo = {}
@@ -25,9 +25,9 @@ import logging
 #    return map(lambda x:x/phraseLen, scoreOffset)
 #
 # @cacheByName
-def extractPitchMidiNum(sample):
+def extract_pitch_midi_num(sample):
    pitches = sample['score'].flat.notes.pitches
-   return map (lambda x:x.midi, pitches)
+   return list(map(lambda x:x.midi, pitches))
 #
 # @cacheByName
 # def extractPitchDiffNextMidiNum(sample):
