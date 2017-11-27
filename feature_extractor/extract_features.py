@@ -4,7 +4,7 @@ import featureManager
 import sampleLoader
 
 def main():
-# FIXME: hardcoded input path
+   # FIXME: hardcoded input path
    inputlist = "../data/corpus/split/test.list"
    # We should probably extract all features, and let training script split it
 
