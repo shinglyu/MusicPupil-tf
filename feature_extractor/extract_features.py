@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import config
-import featureManager
-import sampleLoader
+import feature_manager
+import sample_loader
 
 def main():
    # FIXME: hardcoded input path
@@ -9,7 +9,7 @@ def main():
    # We should probably extract all features, and let training script split it
 
    # TODO: maybe auto-search the folder?
-   trainSampList = sampleLoader.parseFileList(inputlist)
+   training_samples = sample_loader.load_file_list(inputlist)
 
    trainFeatsList = []
    for trainSampFilename in trainSampList:
