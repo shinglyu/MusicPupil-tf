@@ -42,3 +42,4 @@ Automatic Train/Test splitting
 Automatic parameter selection
 Use the audio and visual dashboard in TensorBoard
 Test Python3
+Connect feature extractor output to TF
