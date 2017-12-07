@@ -3,23 +3,34 @@ import config
 import feature_manager
 import sample_loader
 import json
+import os
 
 def main():
     # FIXME: hardcoded input/output path
     inputlist = "../data/corpus/split/test.list"
-    training_features_filename = "./test_features.json"
+    input_path = os.path.dirname(inputlist)
+    training_features_filename = "./test_training_features.json"
     # We should probably extract all features, and let training script split it
 
     # TODO: maybe auto-search the folder?
     with open(inputlist, 'r') as f:
         sample_pathes = map(lambda x: x.strip(), f.readlines())
 
-    sample_loaders = [sample_loader.SampleLoader(path) for path in sample_pathes]
+    # TODO: move this path appending logic to sample_loader
+    sample_loaders = [sample_loader.SampleLoader(os.path.join(input_path, path)) for path in sample_pathes]
 
-    samples = [feature_manager.loader.load_training_sample() for loader in sample_loaders]
-    training_features = [?]
+    samples = [loader.load_training_sample() for loader in sample_loaders]
+    # TODO: move this to a yaml config file
+    features = {
+        "score_features": ["pitch_midi_num"],
+        "perf_features": ["midi_velocity"]
+    }
 
     # TODO: extract features
+
+    extractor = feature_manager.FeatureManager(features)
+
+    training_features = [extractor.extract_all(sample) for sample in samples]
 
     with open(training_features_filename, 'w') as f:
         json.dump(training_features, f, indent=3)

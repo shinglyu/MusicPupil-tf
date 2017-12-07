@@ -3,6 +3,7 @@
 # import perf_features
 # import json
 # import logging
+from collections import defaultdict
 
 
 # def formatFeatFile(name, scoreFeats, perfFeats):
@@ -49,3 +50,17 @@ def extract_features(sample, features_list, extractor_module):
 ##    with open(filename, 'r') as f:
 ##       return json.load(f, encoding='utf-8')
 #
+
+class FeatureManager():
+    def __init__(self, feature_list):
+        self.feature_list = feature_list
+
+    def extract_all(self, sample):
+        feats = defaultdict(dict)
+        feats['name'] = sample['name']
+        for extractor_module, features in self.feature_list.items():
+            module = __import__(extractor_module)
+            for feature in features:
+                feature_extraction_function = getattr(module, 'extract_' + feature)
+                feats[extractor_module][feature] = (feature_extraction_function(sample))
+        return feats
