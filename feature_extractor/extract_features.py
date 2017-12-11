@@ -1,18 +1,21 @@
 #!/usr/bin/env python
 import config
+import csv
 import feature_manager
-import sample_loader
 import json
 import os
+import sample_loader
 
 def main():
     # FIXME: hardcoded input/output path
     inputlist = "../data/corpus/split/test.list"
     input_path = os.path.dirname(inputlist)
-    training_features_filename = "./test_training_features.json"
+    # training_features_filename = "./test_training_features.json"
+    training_features_filename = "./test_training_features.csv"
     # We should probably extract all features, and let training script split it
 
     # TODO: maybe auto-search the folder?
+    print("Loading files specified in {}".format(inputlist))
     with open(inputlist, 'r') as f:
         sample_pathes = map(lambda x: x.strip(), f.readlines())
 
@@ -32,8 +35,10 @@ def main():
 
     training_features = [extractor.extract_all(sample) for sample in samples]
 
+    # JSON output
     with open(training_features_filename, 'w') as f:
-        json.dump(training_features, f, indent=3)
+       json.dump(training_features, f, indent=3)
+    print("Features saved to {}".format(training_features_filename))
 
 if __name__ == "__main__":
     main()
