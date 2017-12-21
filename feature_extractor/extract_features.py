@@ -10,8 +10,8 @@ def main():
     # FIXME: hardcoded input/output path
     inputlist = "../data/corpus/split/test.list"
     input_path = os.path.dirname(inputlist)
-    # training_features_filename = "./test_training_features.json"
-    training_features_filename = "./test_training_features.csv"
+    training_features_filename = "./test_training_features.json"
+    # training_features_filename = "./test_training_features.csv"
     # We should probably extract all features, and let training script split it
 
     # TODO: maybe auto-search the folder?

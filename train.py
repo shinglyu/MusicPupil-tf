@@ -6,8 +6,9 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 
 # Global settings
-fileprefix="data/music" # TODO: use path lib
-target = "loudness" # How to handle multiple variable?
+# TODO: Change this to argparse
+fileprefix="data/test_0" # TODO: use path lib
+target = "midi_velocity" # How to handle multiple variable?
 
 #==========================
 
@@ -15,6 +16,7 @@ target = "loudness" # How to handle multiple variable?
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 # Load training data set from CSV file
+# TODO: extract this training and testing suffix to a config
 training_data_df = pd.read_csv("{}_training.csv".format(fileprefix), dtype=float)
 
 # Pull out columns for X (data to train with) and Y (value to predict)
@@ -22,7 +24,7 @@ X_training = training_data_df.drop(target, axis=1).values
 Y_training = training_data_df[[target]].values
 
 # Load testing data set from CSV file
-test_data_df = pd.read_csv("{}_test.csv".format(fileprefix), dtype=float)
+test_data_df = pd.read_csv("{}_testing.csv".format(fileprefix), dtype=float)
 
 # Pull out columns for X (data to train with) and Y (value to predict)
 X_testing = test_data_df.drop(target, axis=1).values
@@ -47,7 +49,7 @@ training_epochs = 100
 display_step = 5
 
 # Define how many inputs and outputs are in our neural network
-number_of_inputs = 2  # TODO: not hardcode this
+number_of_inputs = 1  # TODO: not hardcode this
 number_of_outputs = 1
 
 # Define how many neurons we want in each layer of our neural network

@@ -57,14 +57,16 @@ def test_export_to_csv():
 
 def test_export_all_to_csv():
     splits = [
+        {"training": "training_0", "testing": "testing_0"},
         {"training": "training_1", "testing": "testing_1"},
         {"training": "training_2", "testing": "testing_2"},
-        {"training": "training_3", "testing": "testing_1"},
     ]
 
     with patch("split_and_export.export_to_csv") as mock_export:
         split_and_export.export_all_to_csv(splits, "tests/test_export")
-        assert mock_export.called_with("training_1", "tests/test_export_1_training.csv")
-        assert mock_export.called_with("testing_1", "tests/test_export_1_testing.csv")
-        assert mock_export.called_with("training_2", "tests/test_export_2_training.csv")
-        assert mock_export.called_with("testing_2", "tests/test_export_2_testing.csv")
+        mock_export.assert_any_call("testing_0", "tests/test_export_0_testing.csv")
+        mock_export.assert_any_call("training_0", "tests/test_export_0_training.csv")
+        mock_export.assert_any_call("testing_1", "tests/test_export_1_testing.csv")
+        mock_export.assert_any_call("training_1", "tests/test_export_1_training.csv")
+        mock_export.assert_any_call("testing_2", "tests/test_export_2_testing.csv")
+        mock_export.assert_any_call("training_2", "tests/test_export_2_training.csv")

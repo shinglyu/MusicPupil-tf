@@ -1,3 +1,4 @@
+import json
 from sklearn.model_selection import KFold
 import pandas as pd;
 
@@ -31,14 +32,24 @@ def export_to_csv(samples, filename):
     all_data = pd.concat([all_score_features_df, all_perf_features_df], axis=1)
 
     all_data.to_csv(filename, index=False)
+    print("{} saved".format(filename))
 
 def export_all_to_csv(splits, filename_base):
     for idx, split in enumerate(splits):
         export_to_csv(split['training'], "{base}_{idx}_{usage}.csv".format(base=filename_base, idx=idx, usage="training"))
-        export_to_csv(split['testing'], "{base}_{idx}_{usage}.csv".format(base=filename_base, idx=idx, usage="training"))
+        export_to_csv(split['testing'], "{base}_{idx}_{usage}.csv".format(base=filename_base, idx=idx, usage="testing"))
 
 def main():
-    raise NotImplementedError
+    # TODO: hardcoded input
+    input_json = './test_training_features.json'
+    output_base = '../data/test'
+    n_splits = 4
+
+    with open(input_json, 'r') as f:
+        samples = json.load(f)
+
+    splits = split_train_test(samples, n_splits)
+    export_all_to_csv(splits, output_base)
 
 if __name__ == "__main__":
     main()
