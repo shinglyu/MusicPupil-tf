@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import pickle
 import os
 import tensorflow as tf
 import pandas as pd
@@ -85,7 +86,7 @@ with tf.variable_scope('layer_3'):
 with tf.variable_scope('output'):
     weights = tf.get_variable("weights4", shape=[layer_3_nodes, number_of_outputs], initializer=tf.contrib.layers.xavier_initializer())
     biases = tf.get_variable(name="biases4", shape=[number_of_outputs], initializer=tf.zeros_initializer())
-    prediction = tf.matmul(layer_3_output, weights) + biases
+    prediction = tf.add(tf.matmul(layer_3_output, weights), biases, name="prediction")
 
 # Section Two: Define the cost function of the neural network that will be optimized during training
 
@@ -145,6 +146,7 @@ with tf.Session() as session:
 
     # Now that the neural network is trained, let's use it to make predictions for our test data.
     # Pass in the X testing data and run the "prediciton" operation
+    print(X_scaled_testing)
     Y_predicted_scaled = session.run(prediction, feed_dict={X: X_scaled_testing})
 
     # Unscale the data back to it's original units (dollars)
@@ -159,11 +161,12 @@ with tf.Session() as session:
     # Saving the model
     model_builder = tf.saved_model.builder.SavedModelBuilder("exported_model")
 
+    # TODO: names
     inputs = {
         'input': tf.saved_model.utils.build_tensor_info(X)
         }
     outputs = {
-        'earnings': tf.saved_model.utils.build_tensor_info(prediction)
+        'output': tf.saved_model.utils.build_tensor_info(prediction)
         }
 
     signature_def = tf.saved_model.signature_def_utils.build_signature_def(
@@ -181,3 +184,14 @@ with tf.Session() as session:
     )
 
     model_builder.save()
+
+    # Save scalers
+    # TODO: Figure out a way to integrate this into the saved model
+    x_scaler_file = 'exported_model/x_scaler.pkl'
+    pickle.dump(X_scaler, open(x_scaler_file, 'wb'))
+    y_scaler_file = 'exported_model/y_scaler.pkl'
+    pickle.dump(Y_scaler, open(y_scaler_file, 'wb'))
+
+
+
+
