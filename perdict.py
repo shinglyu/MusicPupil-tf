@@ -14,11 +14,13 @@ def main():
 
     # TODO: hardcoded path, use argparse
     export_dir = "./exported_model"
+    input_file = "data/test/test_0_testing.csv"
+    output_file = "data/test/test_0_predicted.csv"
     with tf.Session() as session:
         tf.saved_model.loader.load(session, [tf.saved_model.tag_constants.SERVING], export_dir)
 
-        testing_data_df = pd.read_csv("data/test_0_testing.csv", dtype=float)
-        target = "midi_velocity" # How to handle multiple variable?
+        testing_data_df = pd.read_csv(input_file, dtype=float)
+        target = "perf_midi_velocity" # How to handle multiple variable?
         X_testing = testing_data_df.drop(target, axis=1).values
         X_scaler = pickle.load(open('exported_model/x_scaler.pkl', 'rb'))
         Y_scaler = pickle.load(open('exported_model/y_scaler.pkl', 'rb'))

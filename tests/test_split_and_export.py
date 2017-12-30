@@ -70,3 +70,4 @@ def test_export_all_to_csv():
         mock_export.assert_any_call("training_1", "tests/test_export_1_training.csv")
         mock_export.assert_any_call("testing_2", "tests/test_export_2_testing.csv")
         mock_export.assert_any_call("training_2", "tests/test_export_2_training.csv")
+

@@ -1,5 +1,5 @@
-python extract_features.py # Generates the json features
-python split_and_export.py # Use K-fold splitting and export the features into CSV
+python extract_features.py # Generates the .feature.csv files
+python split_and_collectt.py # Use K-fold splitting and collect the features CSV files into a single concatenated training and testing CSV
 
 TODO:
 - argparse for extract_features.py

@@ -8,8 +8,8 @@ from sklearn.preprocessing import MinMaxScaler
 
 # Global settings
 # TODO: Change this to argparse
-fileprefix="data/test_0" # TODO: use path lib
-target = "midi_velocity" # How to handle multiple variable?
+fileprefix="data/test/test_0" # TODO: use path lib
+target = "perf_midi_velocity" # How to handle multiple variable?
 
 #==========================
 
